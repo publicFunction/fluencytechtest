@@ -3,6 +3,8 @@ jQuery(document).ready(function($) {
     $('#get_quote').on('click', function() {
         if ($('input#postcode').val() != "") {
             $.cookie("postcode", $('input#postcode').val());
+            $.cookie("contract", $('select#contract_length').val());
+            $.cookie("site_name", $('input#site_name').val());
             $.post( 'ajax/processajax.php', 
                     {
                         'action' : 'storeQuote',
@@ -25,10 +27,55 @@ jQuery(document).ready(function($) {
                                         var jsonData = $.parseJSON(response);
                                         console.log(jsonData);
                                         if (jsonData.Openreach) {
-                                            console.log(jsonData.Openreach);
+                                            for (i = 0; i < jsonData.Openreach.Options.length; i++) {
+                                                $.post( 'ajax/processajax.php', 
+                                                        {
+                                                            'action' : 'createQuote',
+                                                            'ethernet_quote_id' : $.cookie("master_quote"),
+                                                            'site_name' : $.cookie("site_name"),
+                                                            'postcode' : $.cookie("postcode"),
+                                                            'bandwidth' : '',
+                                                            'bearer' : '',
+                                                            'carrier' : 'Openreach',
+                                                            'buy_price_install' : '',
+                                                            'buy_price_rental' : '',
+                                                            'wholesale_price_install' : '',
+                                                            'wholesale_price_rental' : '',
+                                                            'rrp_price_install' : '',
+                                                            'rrp_price_rental' : '',
+                                                        }, 
+                                                        function() {
+                                                            
+                                                        }
+                                                    );
+                                                console.log(jsonData.Openreach.Options[i]);
+                                            }
+                                            
                                         }
                                         if (jsonData.TalkTalk) {
-                                            console.log(jsonData.TalkTalk);
+                                            for (i = 0; i < jsonData.TalkTalk.Options.length; i++) {
+                                                $.post( 'ajax/processajax.php', 
+                                                        {
+                                                            'action' : 'createQuote',
+                                                            'ethernet_quote_id' : $.cookie("master_quote"),
+                                                            'site_name' : $.cookie("site_name"),
+                                                            'postcode' : $.cookie("postcode"),
+                                                            'bandwidth' : '',
+                                                            'bearer' : '',
+                                                            'carrier' : 'TalkTalk',
+                                                            'buy_price_install' : '',
+                                                            'buy_price_rental' : '',
+                                                            'wholesale_price_install' : '',
+                                                            'wholesale_price_rental' : '',
+                                                            'rrp_price_install' : '',
+                                                            'rrp_price_rental' : '',
+                                                        }, 
+                                                        function() {
+                                                            
+                                                        }
+                                                    );
+                                                console.log(jsonData.TalkTalk.Options[i]);
+                                            }
                                         }
                                         
                                         

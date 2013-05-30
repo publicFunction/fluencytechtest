@@ -12,6 +12,9 @@ switch($action) {
     case "storeQuote":
         echo Fluency::storeUser($_POST);
         break;
+    case "createQuote":
+        
+        break;
     default:
         echo "REQUEST STUFF";
         break;
