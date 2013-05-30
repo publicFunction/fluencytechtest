@@ -37,46 +37,6 @@ class DB {
             }
         }
     }
-	/*
-     * Trying to create a hyper intelligent Page Update system 
-     */
-	
-    public static function dbUpdatePage($table, $data) {
-        $end = array_pop(array_keys($data));
-		$query = "UPDATE ".$table." SET ";
-		foreach ($data as $key=>$val) {
-			if ($key == "id") {
-			} else {
-				if ($end == $key) {
-					$query .= $key."='".$val."' ";
-				} else {
-					$query .= $key."='".$val."', ";
-				}
-			}
-		}
-		$query .= " WHERE id='".$data['id']."';";
-		$dbFields = DB::dbQuery($query,"0");
-        if (!$dbFields) {
-            echo "<p>Sorry there was an error updating the content of this page.  Please alert a site administrator so this can corrected.</p>";
-            echo mysql_error();
-        }
-    }
-
-    public static function dbInsertContact($table, $data) {
-		$query = "INSERT INTO ".$table." VALUES ('',";
-		foreach ($data as $key=>$val) {
-            if (end($data) == $val) {
-                $query .= "'".$val."' ";
-            } else {
-                $query .= "'".$val."', ";
-            }
-		}
-		$query .= ", '');";
-		$dbFields = DB::dbQuery($query,"0");
-        if (!$dbFields) {
-            error::displayError(12);
-        }
-    }
 
     public static function dbInsert($table, $data) {
         $count = count($data);
@@ -144,15 +104,13 @@ class DB {
 
     }
 
-    public static function dbResMenu($qRes) {
-        while ($showMenu = mysql_fetch_assoc($qRes)) {
-                echo "<a href='".$showMenu['menuLink']."' title='".$showMenu['menuTitle']."'>".$showMenu['menuName']."</a> | ";
-        }
-    }
-
     public static function dbCount($qRes) {
         $num = mysql_num_rows($qRes);
         return $num;
+    }
+    
+    public static function dbClose() {
+        return mysql_close();
     }
 	
 }
