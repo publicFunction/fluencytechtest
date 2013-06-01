@@ -42,3 +42,21 @@ input[type=text] {
     width: 400px;
     margin: 20px auto 20px auto;
 }
+
+div.inline {
+    display: inline-block;
+}
+
+div.cell {
+    width: 185px;
+}
+
+div.cell span {
+    display: block;
+    vertical-align: top;
+}
+
+div.cell span.label {
+    font-weight: 700;
+    margin: 0px 0px 10px 0px;
+}

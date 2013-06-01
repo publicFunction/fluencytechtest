@@ -48,8 +48,3 @@ require_once('class/class.ft.php');
         </div>
     </body>
 </html>
-
-<?php
-
-
-?>

@@ -6,27 +6,27 @@
  */
 class DB {
 	
-	private $conn = false;
+    private $conn = false;
+
+    public function __construct() {
+            /*	To be written	*/
+    }
+
+    public function __destruct() {
+            /*	To be written	*/
+    }
 	
-	public function __construct() {
-		/*	To be written	*/
-	}
-	
-	public function __destruct() {
-		/*	To be written	*/
-	}
-	
-	/*
-	 * Returns boolean value
-	 * 
-	 * @uses mysql_connect(), mysql_select_db()
-	 *
-	 * @param string $srv string for the database server name/hostname
-	 * @param string $usr string for the database server username
-	 * @param string $pas string for the database server users password
-	 * @param string $dbs string for the database server database to use
-	 * @return boolean
-	 */
+    /**
+     * Returns boolean value
+     * 
+     * @uses mysql_connect(), mysql_select_db()
+     *
+     * @param string $srv string for the database server name/hostname
+     * @param string $usr string for the database server username
+     * @param string $pas string for the database server users password
+     * @param string $dbs string for the database server database to use
+     * @return boolean
+     */
     public static function dbSetup($srv, $usr, $pas, $dbs) {
         $conn = mysql_connect($srv, $usr, $pas);
         if (!$conn) {
@@ -41,15 +41,15 @@ class DB {
 		return $conn;
     }
 	
-	/*
-	 * Returns Database Result set or single value
-	 * 
-	 * @uses mysql_query()
-	 *
-	 * @param string $sql string correctly formatted SQL Statement/Query
-	 * @param string $qType string of 0 or 1. 0 will return a full result set. 1 will return a requested value from $sql 
-	 * @return DB Result set or DB value in an associative array
-	 */
+    /**
+     * Returns Database Result set or single value
+     * 
+     * @uses mysql_query()
+     *
+     * @param string $sql string correctly formatted SQL Statement/Query
+     * @param string $qType string of 0 or 1. 0 will return a full result set. 1 will return a requested value from $sql 
+     * @return DB Result set or DB value in an associative array
+     */
     public static function dbQuery($sql, $qType) {
         $runQ = mysql_query($sql);
         if (!$runQ) {
@@ -70,15 +70,15 @@ class DB {
         }
     }
 	
-	/*
-	 * Inserts a DB record
-	 * 
-	 * @uses self::dbQuery()
-	 *
-	 * @param string $table string of the required table name to manipulate
-	 * @param array $data must be a correctly formatted associative array of field names and values for insertion
-	 * @return DB Result set or DB value in an associative array
-	 */
+    /**
+     * Inserts a DB record
+     * 
+     * @uses self::dbQuery()
+     *
+     * @param string $table string of the required table name to manipulate
+     * @param array $data must be a correctly formatted associative array of field names and values for insertion
+     * @return DB Result set or DB value in an associative array
+     */
     public static function dbInsert($table, $data) {
         $count = count($data);
         $i=1;
@@ -97,15 +97,15 @@ class DB {
             error::displayError(12);
         }
     }
-	/*
-	 * Fetches a 
-	 * 
-	 * @uses mysql_fetch_array(), mysql_fetch_assoc()
-	 *
-	 * @param ResultSet $data must be a valid mysql result set obtained by mysql_query or self::dbQuery() 
-	 * @param array $data must be a correctly formatted associative array of field names and values for insertion
-	 * @return DB Result set or DB value in an associative array
-	 */
+    /**
+     * Fetches a 
+     * 
+     * @uses mysql_fetch_array(), mysql_fetch_assoc()
+     *
+     * @param ResultSet $data must be a valid mysql result set obtained by mysql_query or self::dbQuery() 
+     * @param array $data must be a correctly formatted associative array of field names and values for insertion
+     * @return DB Result set or DB value in an associative array
+     */
     public static function dbFetch($data, $type) {
         switch ($type) {
             case "assoc":
