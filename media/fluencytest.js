@@ -7,7 +7,7 @@ jQuery(document).ready(function($) {
             $.cookie("site_name", $('input#site_name').val());
             $.post( 'ajax/processajax.php', 
                     {
-                        'action' : 'storeQuote',
+                        'action' : 'storeUser',
                         'customer_name' : $('input#customer_name').val(),
                         'contract_length' : $('select#contract_length').val(),
                         'site_name' : $('input#site_name').val(),
