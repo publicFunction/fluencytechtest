@@ -128,7 +128,7 @@ class Fluency {
      * @uses self::connectDB(), DB::dbInsert()
      *
      * @param array $data The array must be correctly formatted to be dumped into the database
-     * @return string|object
+     * @return string
      */
     public static function storeUser($data) {
     	/*	This function is used to store the ethernet_quotes data into the table */
@@ -150,21 +150,35 @@ class Fluency {
      * @uses self::connectDB, DB::dbInsert, self::closeDB
      *
      * @param array $data The array must be correctly formatted to be dumped into the database
-     * @return string|nothing
+     * @return null|nothing
      */
     private static function storeQuote($table, $data) {
         self::connectDB();
         DB::dbInsert($table, $data);
         self::closeDB();
     }
-
+    
+    /**
+     * Returns Nothing
+     * 
+     * @uses self::connectDB, DB::dbDelete, self::closeDB
+     *
+     * @param int $id 
+     * @return null|nothing
+     */
+    public static function deleteQuote($id) {
+        self::connectDB();
+        DB::dbDelete('ethernet_quote_items', "id", $id);
+        self::closeDB();
+    }
+    
     /**
     * Returns Nothing
     * 
     * @uses self::connectDB, DB
     *
     * @param array $data The array must be correctly formatted to be dumped into the database
-    * @return nothing
+    * @return null|nothing
     */
     public static function processQuote($postData) {
     	/*	This function will take each request and prep it for data processing */

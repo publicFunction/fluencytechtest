@@ -1,5 +1,27 @@
 jQuery(document).ready(function($) {
     
+    $('li div.remove input.delete_quote').on('click', function() {
+        console.log($(this).attr('id'));
+        var quote = $(this).attr('id').replace('delete_', '');
+        console.log(quote);
+        var del_conf = confirm("Are you sure you want to delete this quote?");
+        console.log(del_conf);
+        if (del_conf == true) {
+            $.post( 'ajax/processajax.php',
+                    {
+                        'action' : 'deleteQuote',
+                        'quote' : quote
+                    },
+                    function() {
+                        location.reload();
+                    }
+            );
+        }
+        
+        return false;
+    });
+    
+    /*  Full Ajax on the quote system and processes eveything in one fail swoop */
     $('#get_quote').on('click', function() {
         if ($('input#postcode').val() != "") {
             $.cookie("postcode", $('input#postcode').val());
