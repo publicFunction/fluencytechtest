@@ -34,7 +34,6 @@ input[type=text] {
     max-width: 80%;
     min-width: 320px;
     margin: 0px auto 0px auto;
-    background: firebrick;
     min-height: 100px;
 }
 
@@ -48,7 +47,7 @@ div.inline {
 }
 
 div.cell {
-    width: 185px;
+    width: 13.5%;
 }
 
 div.cell span {
